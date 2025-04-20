@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Create SPL Token - NeuroNet (NRN)</title>
-    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
-    <script src="https://unpkg.com/@solana/spl-token@latest/lib/index.iife.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@solana/spl-token@0.3.5/lib/index.iife.min.js"></script>
 </head>
 <body style="background-color:#0e0e0e; color:white; font-family:Arial; text-align:center; padding:50px">
     <h1>Create NeuroNet Token (NRN)</h1>
@@ -31,7 +31,7 @@
 
                 const mint = await splToken.Token.createMint(
                     connection,
-                    wallet,
+                    provider,
                     wallet,
                     null,
                     9,
@@ -47,3 +47,4 @@
     </script>
 </body>
 </html>
+
