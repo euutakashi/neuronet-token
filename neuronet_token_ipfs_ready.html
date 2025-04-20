@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create SPL Token - NeuroNet (NRN)</title>
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+    <script src="https://unpkg.com/@solana/spl-token@latest/lib/index.iife.js"></script>
+</head>
+<body style="background-color:#0e0e0e; color:white; font-family:Arial; text-align:center; padding:50px">
+    <h1>Create NeuroNet Token (NRN)</h1>
+    <button onclick="createToken()" style="padding:15px 30px; font-size:18px; background:#6b00b3; color:white; border:none; border-radius:10px; cursor:pointer;">Criar Token</button>
+    <p id="result" style="margin-top:40px; font-size:18px;"></p>
+
+    <footer style="margin-top:80px; font-size:14px; color:#999;">
+        Feito por <b>Takashi</b>
+    </footer>
+
+    <script>
+        async function createToken() {
+            try {
+                const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'), 'confirmed');
+                const provider = window.solana;
+                if (!provider || !provider.isPhantom) {
+                    alert('Phantom Wallet não detectada!');
+                    return;
+                }
+
+                await provider.connect();
+                const wallet = provider.publicKey;
+
+                const mint = await splToken.Token.createMint(
+                    connection,
+                    wallet,
+                    wallet,
+                    null,
+                    9,
+                    splToken.TOKEN_PROGRAM_ID
+                );
+
+                document.getElementById("result").innerHTML = "Token criado com sucesso!<br><b>Endereço:</b><br>" + mint.publicKey.toBase58();
+            } catch (err) {
+                console.error(err);
+                document.getElementById("result").innerText = "Erro: " + err.message;
+            }
+        }
+    </script>
+</body>
+</html>
